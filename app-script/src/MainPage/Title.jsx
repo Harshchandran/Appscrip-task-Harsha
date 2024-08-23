@@ -10,7 +10,7 @@ export const Title = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
             sunt ipsam eum, itaque dolore doloribus minus reiciendis assumenda
             recusandae eius molestias labore accusantium laudantium voluptatibus
-            illo minima quas rem vitae!
+            illo minima quas rem vitae!.
           </p>
         </div>
       </div>
