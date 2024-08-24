@@ -2,11 +2,31 @@ import React, { useState } from "react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
 
-export const Accordian = () => {
+export const Accordion = ({ selectedFilters, setSelectedFilters }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const handleFilterChange = (title, subItem) => {
+    setSelectedFilters((prev) => {
+      const currentFilters = prev[title] || [];
+      const newFilters = currentFilters.includes(subItem)
+        ? currentFilters.filter((item) => item !== subItem)
+        : [...currentFilters, subItem];
+      return {
+        ...prev,
+        [title]: newFilters,
+      };
+    });
+  };
+
+  const handleUnselectAll = (title) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [title]: [], // Clears all selected filters for this title
+    }));
   };
 
   const accordionItems = [
@@ -16,13 +36,21 @@ export const Accordian = () => {
     },
     {
       title: "OCCASION",
-      content: ["Work", "Casual", "Party"],
+      content: ["Work", "Casual", "Party", "Sports"],
     },
     {
       title: "FABRIC",
       content: ["Cotton", "Denim", "Silk", "Wool"],
     },
-
+    {
+      title: "SEGMENT",
+      content: [
+        "Electronics",
+        "Clothing",
+        "Home & Kitchen",
+        "Beauty & Personal Care",
+      ],
+    },
     {
       title: "SUITABLE FOR",
       content: ["Work", "Casual", "Party"],
@@ -56,10 +84,22 @@ export const Accordian = () => {
           <div
             className={`accordion-content ${openIndex === index ? "show" : ""}`}
           >
-            <div onClick={""}>unselect all</div>
+            <div
+              className="unselect-all-btn"
+              onClick={() => handleUnselectAll(item.title)}
+            >
+              Unselect All
+            </div>
             {item.content.map((subItem, subIndex) => (
               <div key={subIndex} className="checkbox-container">
-                <input type="checkbox" id={`checkbox-${index}-${subIndex}`} />
+                <input
+                  type="checkbox"
+                  id={`checkbox-${index}-${subIndex}`}
+                  checked={
+                    selectedFilters[item.title]?.includes(subItem) || false
+                  }
+                  onChange={() => handleFilterChange(item.title, subItem)}
+                />
                 <label htmlFor={`checkbox-${index}-${subIndex}`}>
                   {subItem}
                 </label>

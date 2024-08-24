@@ -177,6 +177,9 @@
   justify-content: center;
   text-align: center;
 }
+.mobile-page-Nav {
+  display: none;
+}
 
 /* Media Query for Title File */
 
@@ -203,6 +206,12 @@
   .page-description {
     justify-content: center;
     text-align: center;
+  }
+  .mobile-page-Nav {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    display: block;
   }
 }
 
@@ -442,8 +451,8 @@ footer {
 /* Accordion File*/
 
 .accordion {
-  max-width: 20%;
-  min-width: 20%;
+  max-width: 80%;
+  min-width: 80%;
   margin: 0 auto;
 }
 
@@ -503,6 +512,18 @@ footer {
   gap: 1rem;
 }
 
+.unselect-all-btn {
+  margin: 1rem 0;
+  color: #b0b0b0;
+  text-decoration: underline 0.01rem solid #b0b0b0;
+  cursor: pointer;
+}
+
+.customizable-title {
+  font-weight: 800;
+  margin: 1.5rem 0;
+}
+
 /* Content File */
 
 .content-header {
@@ -545,6 +566,10 @@ footer {
 }
 
 /* Filters File */
+
+.filter-page-container {
+  width: 20%;
+}
 
 .filters-btn {
   border: none;

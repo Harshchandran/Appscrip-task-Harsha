@@ -16,8 +16,8 @@ export const ProductCard = ({ product, showFilters }) => {
         <h2 className="product-title">{product.title}</h2>
         <div className="card-description-box">
           <p className="card-description">
-            <span style={{ textDecoder: "underline" }}> Sign in</span> or Create
-            an account to see Pricing
+            <span style={{ textDecoration: "underline" }}> Sign in</span> or
+            Create an account to see Pricing
           </p>
           <div>
             <FavoriteBorderRoundedIcon />

@@ -10,7 +10,11 @@ export const Content = () => {
 
   const [showFilters, setShowFilters] = useState(false);
 
+  const [filteredData, setFilteredData] = useState([]);
+
   const [selectedOption, setSelectedOption] = useState("");
+
+  const [selectedFilters, setSelectedFilters] = useState({});
 
   async function fetchData() {
     try {
@@ -18,18 +22,36 @@ export const Content = () => {
       const response = await fetch(api);
       const data = await response.json();
       setProductData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   }
 
   useEffect(() => {
+    console.log(selectedFilters);
     fetchData();
-  }, [selectedOption]);
+  }, [selectedOption, selectedFilters]);
 
   const handleFilterDisplay = () => {
     setShowFilters((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    console.log(selectedFilters);
+    const filterData = () => {
+      return productData.filter((product) => {
+        return Object.keys(selectedFilters).every((key) => {
+          const selected = selectedFilters[key];
+          if (!selected.length) return true;
+          return selected.includes(product[key]);
+        });
+      });
+    };
+
+    setFilteredData(filterData());
+    console.log(filterData());
+  }, [productData, selectedFilters]);
 
   return (
     <>
@@ -55,8 +77,13 @@ export const Content = () => {
           />
         </div>
         <div className="content-body">
-          {showFilters && <Filters />}
-          <ProductList productData={productData} showFilters={showFilters} />
+          {showFilters && (
+            <Filters
+              selectedFilters={selectedFilters}
+              setSelectedFilters={setSelectedFilters}
+            />
+          )}
+          <ProductList productData={filteredData} showFilters={showFilters} />
         </div>
       </div>
 
@@ -72,8 +99,13 @@ export const Content = () => {
           </div>
         </div>
         <div className="content-body">
-          {showFilters && <Filters />}
-          <ProductList productData={productData} showFilters={true} />
+          {showFilters && (
+            <Filters
+              selectedFilters={selectedFilters}
+              setSelectedFilters={setSelectedFilters}
+            />
+          )}
+          <ProductList productData={filteredData} showFilters={true} />
         </div>
       </div>
     </>

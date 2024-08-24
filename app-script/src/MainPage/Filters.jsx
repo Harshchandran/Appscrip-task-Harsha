@@ -1,12 +1,14 @@
 import React from "react";
-import { Accordian } from "./Accordian";
-import { MobileAccordian } from "./MobileAccordian";
+import { Accordion } from "./Accordian";
 
-export const Filters = () => {
+export const Filters = ({ selectedFilters, setSelectedFilters }) => {
   return (
     <>
-      <div className="tablet-filter">
-        <Accordian />
+      <div className="filter-page-container">
+        <Accordion
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+        />
       </div>
     </>
   );

@@ -3,6 +3,9 @@ import React from "react";
 export const Title = () => {
   return (
     <>
+      <div className="mobile-page-Nav">
+        <span style={{ color: "#b0b0b0" }}>HOME |</span> SHOP
+      </div>
       <div className="title-Container">
         <div>
           <h1 className="page-title">DISCOVER OUR PRODUCTS</h1>

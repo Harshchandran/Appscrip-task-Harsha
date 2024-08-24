@@ -1,5 +1,4 @@
-import { Card } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { ProductCard } from "./ProductCard";
 
 export const ProductList = ({ productData, showFilters }) => {
